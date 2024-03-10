@@ -1,26 +1,21 @@
-import { useEffect, useState } from "react";
-import api from "./services/mock/groups";
-import { GetGroupsResponse } from "./types/groups";
+import Error from "./components/Error";
+import Filter from "./components/Filter";
+import GroupList from "./components/GroupList";
+import ContextProvider from "./context/Context";
+import Store from "./store";
 
-function App() {
-    const [data, setData] = useState<GetGroupsResponse | null>(null);
-    const [error, setError] = useState<Error | null>(null);
+interface AppProps {
+    store: Store;
+}
 
-    useEffect(() => {
-        api.getGroups()
-            .then((data) => setData(data))
-            .catch((error) => setError(error));
-    }, []);
-
-    if (error) {
-        return <>{`Произошла ошибка: ${error.message}`}</>;
-    }
-
-    if (!data) {
-        return <>...Loading</>;
-    }
-
-    return <>{JSON.stringify(data)}</>;
+function App({ store }: AppProps) {
+    return (
+        <ContextProvider store={store}>
+            <Filter />
+            <GroupList />
+            <Error />
+        </ContextProvider>
+    );
 }
 
 export default App;
