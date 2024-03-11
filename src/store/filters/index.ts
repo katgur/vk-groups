@@ -1,20 +1,27 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
-import { AvatarColorFilter, FilterUtil, Filters, TypeFilter } from "../../types/groups";
+import {
+    AvatarColorFilter,
+    FilterUtil,
+    Filters,
+    HasFriendsFilter,
+    TypeFilter,
+} from "../../types/groups";
 
 class FiltersStore {
-    values: Filters
+    values: Filters;
 
     constructor() {
         makeObservable(this, {
             values: observable,
             setTypeFilter: action,
             setAvatarColorFilter: action,
+            setHasFriendsFilter: action,
         });
         this.values = {
             type: FilterUtil.ALL,
             avatarColor: FilterUtil.ALL,
             hasFriends: FilterUtil.ALL,
-        }
+        };
     }
 
     setTypeFilter(filter: TypeFilter) {
@@ -22,8 +29,8 @@ class FiltersStore {
             this.values = {
                 ...this.values,
                 type: filter,
-            }
-        })
+            };
+        });
     }
 
     setAvatarColorFilter(filter: AvatarColorFilter) {
@@ -31,8 +38,17 @@ class FiltersStore {
             this.values = {
                 ...this.values,
                 avatarColor: filter,
-            }
-        })
+            };
+        });
+    }
+
+    setHasFriendsFilter(filter: HasFriendsFilter) {
+        runInAction(() => {
+            this.values = {
+                ...this.values,
+                hasFriends: filter,
+            };
+        });
     }
 }
 

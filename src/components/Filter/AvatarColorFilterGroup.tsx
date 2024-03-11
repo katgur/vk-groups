@@ -4,9 +4,9 @@ import {
     FilterUtil,
     GroupAvatarColor,
 } from "../../types/groups";
-import FiltersStore from "../../store/filters";
+import useFilters from "../../hooks/useFilters";
 
-const typeMap = (type: AvatarColorFilter) => {
+const avatarColorMap = (type: AvatarColorFilter) => {
     switch (type) {
         case GroupAvatarColor.BLUE:
             return "Синий";
@@ -22,38 +22,37 @@ const typeMap = (type: AvatarColorFilter) => {
             return "Белый";
         case GroupAvatarColor.YELLOW:
             return "Желтый";
-        default:
+        case FilterUtil.ALL:
             return "Любой";
+        default:
+            return;
     }
 };
 
-interface AvatarColorFilterProps {
-    filters: FiltersStore;
-}
+function AvatarColorFilterGroup() {
+    const filters = useFilters();
 
-function AvatarColorFilterGroup({ filters }: AvatarColorFilterProps) {
     return (
         <FormLayoutGroup>
             <FormItem top="Цвет аватара">
                 <RadioGroup>
-                    {[
-                        FilterUtil.ALL,
-                        ...Object.values(GroupAvatarColor)
-                    ].map((avatarColor, index) => (
-                        <Radio
-                            key={index}
-                            defaultChecked={
-                                filters.values.avatarColor === avatarColor
-                            }
-                            name="type"
-                            value={avatarColor}
-                            onChange={() => {
-                                filters.setAvatarColorFilter(avatarColor);
-                            }}
-                        >
-                            {typeMap(avatarColor)}
-                        </Radio>
-                    ))}
+                    {[FilterUtil.ALL, ...Object.values(GroupAvatarColor)].map(
+                        (avatarColor, index) => (
+                            <Radio
+                                key={index}
+                                defaultChecked={
+                                    filters.values.avatarColor === avatarColor
+                                }
+                                name="avatar"
+                                value={avatarColor}
+                                onChange={() => {
+                                    filters.setAvatarColorFilter(avatarColor);
+                                }}
+                            >
+                                {avatarColorMap(avatarColor)}
+                            </Radio>
+                        )
+                    )}
                 </RadioGroup>
             </FormItem>
         </FormLayoutGroup>

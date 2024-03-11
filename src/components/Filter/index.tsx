@@ -3,19 +3,18 @@ import {
     Panel,
     View,
 } from "@vkontakte/vkui";
-import useFilters from "../../hooks/useFilters";
 import TypeFilterGroup from "./TypeFilterGroup";
 import AvatarColorFilterGroup from "./AvatarColorFilterGroup";
+import HasFriendFilterGroup from "./HasFriendsFilterGroup";
 
 function Filter() {
-    const filters = useFilters();
-
     return (
         <View activePanel="filter">
             <Panel id="filter">
                 <Group>
-                    <TypeFilterGroup filters={filters} />
-                    <AvatarColorFilterGroup filters={filters} />
+                    <TypeFilterGroup />
+                    <AvatarColorFilterGroup />
+                    <HasFriendFilterGroup />
                 </Group>
             </Panel>
         </View>

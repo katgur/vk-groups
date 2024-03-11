@@ -1,6 +1,6 @@
 import { FormLayoutGroup, FormItem, RadioGroup, Radio } from "@vkontakte/vkui";
 import { FilterUtil, GroupType, TypeFilter } from "../../types/groups";
-import FiltersStore from "../../store/filters";
+import useFilters from "../../hooks/useFilters";
 
 const typeMap = (type: TypeFilter) => {
     switch (type) {
@@ -9,22 +9,20 @@ const typeMap = (type: TypeFilter) => {
         case GroupType.OPEN:
             return "Открытая";
         case FilterUtil.ALL:
-            return "Все";
+            return "Любой";
         default:
             return;
     }
 };
 
-interface TypeFilterProps {
-    filters: FiltersStore
-}
+function TypeFilterGroup() {
+    const filters = useFilters();
 
-function TypeFilterGroup({ filters }: TypeFilterProps) {
     return (
         <FormLayoutGroup>
             <FormItem top="Тип">
                 <RadioGroup>
-                    {[FilterUtil.ALL, GroupType.CLOSED, GroupType.OPEN].map(
+                    {[FilterUtil.ALL, ...Object.values(GroupType)].map(
                         (type, index) => (
                             <Radio
                                 key={index}

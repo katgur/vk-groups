@@ -22,8 +22,8 @@ export enum FilterUtil {
 }
 
 export enum GroupType {
-    OPEN,
-    CLOSED,
+    OPEN = "open",
+    CLOSED = "closed",
 }
 
 export enum GroupAvatarColor {
@@ -37,8 +37,8 @@ export enum GroupAvatarColor {
 }
 
 export enum GroupHasFriends {
-    HAS_FRIENDS,
-    NO_FRIENDS,
+    HAS_FRIENDS = "has_friends",
+    NO_FRIENDS = "no_friends",
 }
 
 export type TypeFilter = GroupType | FilterUtil;
