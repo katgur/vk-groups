@@ -1,3 +1,12 @@
+import {
+    AdaptivityProvider,
+    AppRoot,
+    ConfigProvider,
+    Panel,
+    PanelHeader,
+    SplitCol,
+    SplitLayout,
+} from "@vkontakte/vkui";
 import Error from "./components/Error";
 import Filter from "./components/Filter";
 import GroupList from "./components/GroupList";
@@ -10,11 +19,26 @@ interface AppProps {
 
 function App({ store }: AppProps) {
     return (
-        <ContextProvider store={store}>
-            <Filter />
-            <GroupList />
-            <Error />
-        </ContextProvider>
+        <ConfigProvider>
+            <AdaptivityProvider>
+                <AppRoot>
+                    <ContextProvider store={store}>
+                        <Panel>
+                            <PanelHeader>Группы</PanelHeader>
+                            <SplitLayout style={{ justifyContent: "center" }}>
+                                <SplitCol autoSpaced>
+                                    <Filter />
+                                </SplitCol>
+                                <SplitCol autoSpaced>
+                                    <GroupList />
+                                </SplitCol>
+                                <Error />
+                            </SplitLayout>
+                        </Panel>
+                    </ContextProvider>
+                </AppRoot>
+            </AdaptivityProvider>
+        </ConfigProvider>
     );
 }
 

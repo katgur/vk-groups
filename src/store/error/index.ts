@@ -1,4 +1,4 @@
-import { makeObservable, observable, runInAction } from "mobx";
+import { action, makeObservable, observable, runInAction } from "mobx";
 import Store from "..";
 
 export class ErrorStore {
@@ -8,6 +8,7 @@ export class ErrorStore {
     constructor(store: Store) {
         makeObservable(this, {
             message: observable,
+            setError: action,
         });
         this.store = store;
         this.message = null;

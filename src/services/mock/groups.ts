@@ -20,7 +20,7 @@ function delay<T extends (...args: Parameters<T>) => ReturnType<T>>(
 
 const getGroups = delay<() => GetGroupsResponse>(() => {
     const rnd = Math.random();
-    if (rnd >= 1 / 2) {
+    if (rnd >= 0) {
         return {
             result: 1,
             data: groups,

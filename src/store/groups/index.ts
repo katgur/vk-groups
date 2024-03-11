@@ -1,26 +1,20 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
-import {
-    AvatarColorFilter,
-    FriendsFilter,
-    Group,
-    TypeFilter,
-} from "../../types/groups";
+import { FilterUtil, Filters, GroupForClient } from "../../types/groups";
 import api from "../../services/mock/groups";
 import Store from "..";
+import { mapGroupForClient } from "../../types/map";
 
 class GroupStore {
     store: Store;
-    all: Group[] | null;
-    filtered: Group[] | null;
+    all: GroupForClient[] | null;
+    filtered: GroupForClient[] | null;
 
     constructor(store: Store) {
         makeObservable(this, {
             all: observable,
             filtered: observable,
             fetchAll: action,
-            filterByType: action,
-            filterByAvatarColor: action,
-            filterByHasFriends: action,
+            apply: action,
         });
         this.store = store;
         this.all = null;
@@ -38,8 +32,8 @@ class GroupStore {
                 }
                 const data = response.data;
                 runInAction(() => {
-                    this.all = [...data];
-                    this.filtered = [...data];
+                    this.all = data.map(mapGroupForClient);
+                    this.filtered = data.map(mapGroupForClient);
                 });
             })
             .catch((error) => {
@@ -47,64 +41,17 @@ class GroupStore {
             });
     }
 
-    filterByType(filter: TypeFilter) {
+    apply(filters: Filters) {
         runInAction(() => {
             if (!this.all) {
                 return;
             }
-            switch (filter) {
-                case TypeFilter.ALL:
-                    this.filtered = this.all;
-                    break;
-                case TypeFilter.CLOSE:
-                    this.filtered = this.all.filter((group) => group.closed);
-                    break;
-                case TypeFilter.OPEN:
-                    this.filtered = this.all.filter((group) => !group.closed);
-                    break;
-                default:
-                    break;
-            }
-        });
-    }
-
-    filterByAvatarColor(filter: AvatarColorFilter) {
-        runInAction(() => {
-            if (!this.all) {
-                return;
-            }
-            if (filter === AvatarColorFilter.ALL) {
-                this.filtered = this.all;
-                return;
-            }
-            this.filtered = this.all.filter(
-                (group) => group.avatar_color === filter
+            this.filtered = this.all.filter((group) =>
+                Object.entries(filters).every(
+                    ([key, filter]) =>
+                        filter === FilterUtil.ALL || group[key] === filter
+                )
             );
-        });
-    }
-
-    filterByHasFriends(filter: FriendsFilter) {
-        runInAction(() => {
-            if (!this.all) {
-                return;
-            }
-            switch (filter) {
-                case FriendsFilter.ALL:
-                    this.filtered = this.all;
-                    break;
-                case FriendsFilter.HAS_FRIENDS:
-                    this.filtered = this.all.filter(
-                        (group) => group.friends && group.friends.length !== 0
-                    );
-                    break;
-                case FriendsFilter.NO_FRIENDS:
-                    this.filtered = this.all.filter(
-                        (group) => !group.friends || group.friends.length === 0
-                    );
-                    break;
-                default:
-                    break;
-            }
         });
     }
 }
