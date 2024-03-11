@@ -1,4 +1,4 @@
-import { GetGroupsResponse } from "../../types/groups";
+import { isGetGroupResponse } from "../../types/typeGuards";
 import groups from "./data/groups.json";
 
 function delay<T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -18,7 +18,7 @@ function delay<T extends (...args: Parameters<T>) => ReturnType<T>>(
         });
 }
 
-const getGroups = delay<() => GetGroupsResponse>(() => {
+const fetch = delay((): unknown => {
     const rnd = Math.random();
     if (rnd >= 1 / 2) {
         return {
@@ -37,6 +37,14 @@ const getGroups = delay<() => GetGroupsResponse>(() => {
     }
     throw new Error("Internal Server Error");
 });
+
+const getGroups = async () => {
+    const groups = await fetch();
+    if (!isGetGroupResponse(groups)) {
+        throw new Error("Wrong data from server");
+    }
+    return groups;
+};
 
 export default {
     getGroups,
