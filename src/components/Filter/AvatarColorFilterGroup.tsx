@@ -1,4 +1,10 @@
-import { FormLayoutGroup, FormItem, RadioGroup, Radio } from "@vkontakte/vkui";
+import {
+    FormLayoutGroup,
+    FormItem,
+    RadioGroup,
+    Radio,
+    CustomSelect,
+} from "@vkontakte/vkui";
 import {
     AvatarColorFilter,
     FilterUtil,
@@ -35,7 +41,22 @@ function AvatarColorFilterGroup() {
     return (
         <FormLayoutGroup>
             <FormItem top="Цвет аватара">
-                <RadioGroup>
+                <CustomSelect
+                    id="avatar"
+                    placeholder="Не выбран"
+                    defaultValue={filters.values.avatarColor}
+                    onChange={(e) => {
+                        filters.setAvatarColorFilter(e.target.value);
+                    }}
+                    options={[
+                        FilterUtil.ALL,
+                        ...Object.values(GroupAvatarColor),
+                    ].map((avatarColor) => ({
+                        label: avatarColorMap(avatarColor),
+                        value: avatarColor,
+                    }))}
+                />
+                {/* <RadioGroup>
                     {[FilterUtil.ALL, ...Object.values(GroupAvatarColor)].map(
                         (avatarColor, index) => (
                             <Radio
@@ -53,7 +74,7 @@ function AvatarColorFilterGroup() {
                             </Radio>
                         )
                     )}
-                </RadioGroup>
+                </RadioGroup> */}
             </FormItem>
         </FormLayoutGroup>
     );
