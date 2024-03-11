@@ -5,6 +5,7 @@ import {
 } from "@vkontakte/vkui";
 import useFilters from "../../hooks/useFilters";
 import TypeFilterGroup from "./TypeFilterGroup";
+import AvatarColorFilterGroup from "./AvatarColorFilterGroup";
 
 function Filter() {
     const filters = useFilters();
@@ -14,6 +15,7 @@ function Filter() {
             <Panel id="filter">
                 <Group>
                     <TypeFilterGroup filters={filters} />
+                    <AvatarColorFilterGroup filters={filters} />
                 </Group>
             </Panel>
         </View>
