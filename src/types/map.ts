@@ -23,9 +23,7 @@ export function mapGroupForClient(group: Group): GroupForClient {
     };
 }
 
-function mapAvatarColorForClient(
-    avatarColor?: string
-): GroupAvatarColor {
+function mapAvatarColorForClient(avatarColor?: string): GroupAvatarColor {
     if (!avatarColor) {
         return GroupAvatarColor.NONE;
     }

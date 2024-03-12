@@ -27,7 +27,7 @@ export enum GroupType {
 }
 
 export enum GroupAvatarColor {
-    NONE = "no",
+    NONE = "none",
     WHITE = "white",
     BLUE = "blue",
     RED = "red",
@@ -56,7 +56,7 @@ export interface GroupForClient {
     id: number;
     name: string;
     type: GroupType;
-    avatarColor?: GroupAvatarColor;
+    avatarColor: GroupAvatarColor;
     membersCount: number;
     hasFriends: GroupHasFriends;
     friends: UserForClient[];
