@@ -10,7 +10,7 @@ import {
 import Error from "./components/Error";
 import FilterView from "./components/FilterView";
 import GroupListView from "./components/GroupListView";
-import ContextProvider from "./context/Context";
+import { GroupContextProvider } from "./context/GroupContext";
 import Store from "./store";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -24,7 +24,7 @@ function App({ store }: AppProps) {
             <ConfigProvider>
                 <AdaptivityProvider>
                     <AppRoot>
-                        <ContextProvider store={store}>
+                        <GroupContextProvider store={store}>
                             <Panel>
                                 <PanelHeader>Группы</PanelHeader>
                                 <SplitLayout className="center">
@@ -35,7 +35,7 @@ function App({ store }: AppProps) {
                                 </SplitLayout>
                             </Panel>
                             <Error />
-                        </ContextProvider>
+                        </GroupContextProvider>
                     </AppRoot>
                 </AdaptivityProvider>
             </ConfigProvider>

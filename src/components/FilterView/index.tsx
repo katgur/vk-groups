@@ -1,7 +1,7 @@
 import { FormLayoutGroup, Group, Header, Panel, View } from "@vkontakte/vkui";
 import TypeFilterFormItem from "./TypeFilterFormItem";
-import AvatarColorFormItem from "./AvatarColorFilterGroup";
-import HasFriendFilterFormItem from "./HasFriendsFilterGroup";
+import AvatarColorFormItem from "./AvatarColorFilterFormItem";
+import HasFriendFilterFormItem from "./HasFriendsFilterFormItem";
 
 function FilterView() {
     return (

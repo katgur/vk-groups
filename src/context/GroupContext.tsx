@@ -13,21 +13,21 @@ interface ContextInterface {
     pagination: PaginationStore;
 }
 
-export const Context = createContext<ContextInterface | null>(null);
+export const GroupContext = createContext<ContextInterface | null>(null);
 
 interface ContextProviderProps {
     children: ReactNode;
     store: Store;
 }
 
-const ContextProvider = observer(
+export const GroupContextProvider = observer(
     ({ children, store }: ContextProviderProps) => {
         useEffect(() => {
             store.groups.fetchAll();
         }, [store.groups]);
 
         return (
-            <Context.Provider
+            <GroupContext.Provider
                 value={{
                     error: store.error.info,
                     groups: store.groups.current,
@@ -36,9 +36,9 @@ const ContextProvider = observer(
                 }}
             >
                 {children}
-            </Context.Provider>
+            </GroupContext.Provider>
         );
     }
 );
 
-export default ContextProvider;
+export default GroupContext;

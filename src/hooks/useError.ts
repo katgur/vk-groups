@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Context } from "../context/Context";
+import GroupContext from "../context/GroupContext";
 
 function useError() {
-    const context = useContext(Context);
+    const context = useContext(GroupContext);
     if (!context) {
         throw new Error("ContextProvider is not specified");
     }
