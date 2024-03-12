@@ -27,9 +27,7 @@ function App({ store }: AppProps) {
                         <ContextProvider store={store}>
                             <Panel>
                                 <PanelHeader>Группы</PanelHeader>
-                                <SplitLayout
-                                    style={{ justifyContent: "center" }}
-                                >
+                                <SplitLayout className="center">
                                     <SplitCol maxWidth={560}>
                                         <FilterView />
                                         <GroupListView />

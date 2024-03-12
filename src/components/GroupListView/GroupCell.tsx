@@ -13,7 +13,7 @@ const mapType = (type: GroupType) => {
     }
 };
 
-function GroupCard(group: GroupForClient) {
+function GroupCell(group: GroupForClient) {
     return (
         <SimpleCell
             before={
@@ -63,4 +63,4 @@ function GroupCard(group: GroupForClient) {
     );
 }
 
-export default GroupCard;
+export default GroupCell;

@@ -24,8 +24,8 @@ export function mapGroupForClient(group: Group): GroupForClient {
 }
 
 function mapAvatarColorForClient(
-    avatarColor: string | undefined
-): GroupAvatarColor | undefined {
+    avatarColor?: string
+): GroupAvatarColor {
     if (!avatarColor) {
         return GroupAvatarColor.NONE;
     }

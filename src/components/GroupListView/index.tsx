@@ -1,6 +1,7 @@
 import { Group, Header, Panel, ScreenSpinner, View } from "@vkontakte/vkui";
 import useGroups from "../../hooks/useGroups";
-import GroupCard from "./GroupCard";
+import GroupCell from "./GroupCell";
+import PaginationGroup from "./PaginationGroup";
 
 function GroupListView() {
     const groups = useGroups();
@@ -14,9 +15,10 @@ function GroupListView() {
             <Panel id="list">
                 <Group header={<Header mode="secondary">Список групп</Header>}>
                     {groups.map((group) => (
-                        <GroupCard key={group.id} {...group} />
+                        <GroupCell key={group.id} {...group} />
                     ))}
                 </Group>
+                <PaginationGroup />
             </Panel>
         </View>
     );
