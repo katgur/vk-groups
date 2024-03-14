@@ -157,6 +157,7 @@ export function GroupContextProvider({ children }: ContextProviderProps) {
     });
 
     const getGroups = useCallback(() => {
+        setError(null);
         api.getGroups()
             .then((response) => {
                 if (!response.result) {
