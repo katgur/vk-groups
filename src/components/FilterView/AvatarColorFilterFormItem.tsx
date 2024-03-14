@@ -34,19 +34,19 @@ const avatarColorMap = (type: AvatarColorFilter) => {
 };
 
 function AvatarColorFormItem() {
-    const filters = useFilters();
+    const { filters, setAvatarColorFilter } = useFilters();
 
     return (
         <FormItem top="Цвет аватара">
             <CustomSelect
                 id="avatar"
                 placeholder="Не выбран"
-                defaultValue={filters.values.avatarColor}
+                defaultValue={filters.avatarColor}
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     if (!isAvatarColorFilter(e.target.value)) {
                         return;
                     }
-                    filters.setAvatarColorFilter(e.target.value);
+                    setAvatarColorFilter(e.target.value);
                 }}
                 options={[
                     FilterUtil.ALL,

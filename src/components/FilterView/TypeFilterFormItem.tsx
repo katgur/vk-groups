@@ -16,7 +16,7 @@ const typeMap = (type: TypeFilter) => {
 };
 
 function TypeFilterFormItem() {
-    const filters = useFilters();
+    const { filters, setTypeFilter } = useFilters();
 
     return (
         <FormItem top="Тип">
@@ -25,12 +25,10 @@ function TypeFilterFormItem() {
                     (type, index) => (
                         <Radio
                             key={index}
-                            defaultChecked={filters.values.type === type}
+                            defaultChecked={filters.type === type}
                             name="type"
                             value={type}
-                            onChange={() => {
-                                filters.setTypeFilter(type);
-                            }}
+                            onChange={() => setTypeFilter(type)}
                         >
                             {typeMap(type)}
                         </Radio>

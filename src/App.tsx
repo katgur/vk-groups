@@ -11,31 +11,26 @@ import Error from "./components/Error";
 import FilterView from "./components/FilterView";
 import GroupListView from "./components/GroupListView";
 import { GroupContextProvider } from "./context/GroupContext";
-import Store from "./store";
 import ErrorBoundary from "./components/ErrorBoundary";
 
-interface AppProps {
-    store: Store;
-}
-
-function App({ store }: AppProps) {
+function App() {
     return (
         <ErrorBoundary>
             <ConfigProvider>
                 <AdaptivityProvider>
                     <AppRoot>
-                        <GroupContextProvider store={store}>
-                            <Panel>
-                                <PanelHeader>Группы</PanelHeader>
-                                <SplitLayout className="center">
-                                    <SplitCol maxWidth={560}>
+                        <Panel>
+                            <PanelHeader>Группы</PanelHeader>
+                            <SplitLayout className="center">
+                                <SplitCol maxWidth={560}>
+                                    <GroupContextProvider>
                                         <FilterView />
                                         <GroupListView />
-                                    </SplitCol>
-                                </SplitLayout>
-                            </Panel>
-                            <Error />
-                        </GroupContextProvider>
+                                        <Error />
+                                    </GroupContextProvider>
+                                </SplitCol>
+                            </SplitLayout>
+                        </Panel>
                     </AppRoot>
                 </AdaptivityProvider>
             </ConfigProvider>

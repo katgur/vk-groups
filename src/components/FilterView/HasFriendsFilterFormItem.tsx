@@ -19,7 +19,7 @@ const hasFriendsMap = (hasFriends: HasFriendsFilter) => {
     }
 };
 function HasFriendFilterFormItem() {
-    const filters = useFilters();
+    const { filters, setHasFriendsFilter } = useFilters();
 
     return (
         <FormItem top="Друзья в группе">
@@ -28,14 +28,10 @@ function HasFriendFilterFormItem() {
                     (hasFriends, index) => (
                         <Radio
                             key={index}
-                            defaultChecked={
-                                filters.values.hasFriends === hasFriends
-                            }
+                            defaultChecked={filters.hasFriends === hasFriends}
                             name="friends"
                             value={hasFriends}
-                            onChange={() => {
-                                filters.setHasFriendsFilter(hasFriends);
-                            }}
+                            onChange={() => setHasFriendsFilter(hasFriends)}
                         >
                             {hasFriendsMap(hasFriends)}
                         </Radio>
