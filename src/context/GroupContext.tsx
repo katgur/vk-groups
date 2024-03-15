@@ -63,18 +63,19 @@ function groupsReducer(state: GroupsState, action: Action): GroupsState {
     switch (action.type) {
         case "SET_GROUPS": {
             const groups = action.payload as GroupForClient[];
+            const skip = 0;
             return {
                 ...state,
                 all: [...groups],
                 filtered: [...groups],
                 current: groups.slice(
-                    state.pagination.skip,
+                    skip,
                     state.pagination.limit
                 ),
                 pagination: {
                     ...state.pagination,
                     total: groups.length,
-                    skip: 0,
+                    skip,
                 },
             };
         }
