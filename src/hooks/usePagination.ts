@@ -6,7 +6,11 @@ function useGroups() {
     if (!context) {
         throw new Error("ContextProvider is not specified");
     }
-    return context.pagination;
+    return {
+        pagination: context.pagination,
+        setPage: (page: number) =>
+            context.dispatch({ type: "SET_PAGE", payload: page }),
+    };
 }
 
 export default useGroups;

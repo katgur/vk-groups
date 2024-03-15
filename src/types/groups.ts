@@ -48,6 +48,12 @@ export type HasFriendsFilter = GroupHasFriends | FilterUtil;
 
 export type Filter = TypeFilter | AvatarColorFilter | HasFriendsFilter;
 
+export interface Filters {
+    type: TypeFilter;
+    avatarColor: AvatarColorFilter;
+    hasFriends: HasFriendsFilter;
+}
+
 export interface UserForClient {
     name: string;
 }
@@ -60,10 +66,4 @@ export interface GroupForClient {
     membersCount: number;
     hasFriends: GroupHasFriends;
     friends: UserForClient[];
-}
-
-export interface Filters {
-    type: TypeFilter;
-    avatarColor: AvatarColorFilter;
-    hasFriends: HasFriendsFilter;
 }

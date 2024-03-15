@@ -2,9 +2,9 @@ import { Group, Pagination } from "@vkontakte/vkui";
 import usePagination from "../../hooks/usePagination";
 
 function PaginationGroup() {
-    const pagination = usePagination();
+    const { pagination, setPage } = usePagination();
 
-    const { limit, skip, total } = pagination.value;
+    const { limit, skip, total } = pagination;
 
     if (!total) {
         return;
@@ -15,7 +15,7 @@ function PaginationGroup() {
             <Pagination
                 currentPage={Math.floor(skip / limit) + 1}
                 totalPages={Math.ceil(total / limit)}
-                onChange={(page) => pagination.setPage(page)}
+                onChange={setPage}
             />
         </Group>
     );
